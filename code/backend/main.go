@@ -1,31 +1,24 @@
 package main
 
 import (
-	"fmt"
+	"errors"
+	"flag"
+	"github.com/valverdethiago/water-jug-challenge/code/backend/restapi"
 	"github.com/valverdethiago/water-jug-challenge/code/backend/service"
+	"log"
+	"net/http"
 )
 
-func printSolution(steps []service.State) {
-	if steps == nil {
-		return
-	}
-	for _, step := range steps {
-		fmt.Printf("%d, %d - %s \n", step.BucketX, step.BucketY, step.Explanation)
-	}
-}
-
 func main() {
-	waterJugService := service.NewWaterJugServiceImpl()
-	X, Y, Z := 8, 6, 5 // Example: Jug capacities and target
 
-	solution, found, err := waterJugService.SolveWaterJugProblem(X, Y, Z)
-	if err != nil {
-		fmt.Printf("Error %s \n", err.Error())
+	var port = flag.Int("port", 8080, "port")
+	flag.Parse()
+
+	waterJugService := service.NewWaterJugServiceImpl()
+	server := restapi.NewWaterJugServer(*port, waterJugService)
+	server.BindEndpoints()
+	if err := server.Run(); !errors.Is(err, http.ErrServerClosed) {
+		panic(err)
 	}
-	if found {
-		fmt.Println("Solution Path:")
-		printSolution(solution)
-	} else {
-		fmt.Println("No Solution")
-	}
+	log.Println("shutdown: completed")
 }

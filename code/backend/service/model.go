@@ -3,7 +3,7 @@ package service
 type State struct {
 	BucketX, BucketY int // Current amounts of water in jugs X and Y
 	Explanation      string
-	Previous         *State
+	Previous         *State `json:"-"`
 }
 
 func (s *State) isGoalState(Z int) bool {
