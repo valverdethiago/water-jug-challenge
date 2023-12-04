@@ -17,6 +17,7 @@ type Payload struct {
 func solveChallengeHandler(service service.WaterJugService) http.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		writer.Header().Set("Content-Type", "application/json")
+		enableCors(&writer)
 		var err error
 		if err = validateMethod(request); err != nil {
 			handleError(writer, http.StatusMethodNotAllowed, err)
