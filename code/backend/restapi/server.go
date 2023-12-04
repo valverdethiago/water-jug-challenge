@@ -62,6 +62,10 @@ func (app *WaterJugApp) routingHandler(w http.ResponseWriter, r *http.Request) {
 			solveChallengeHandler(app.service).ServeHTTP(w, r)
 			return
 		}
+		if r.Method == http.MethodOptions {
+			corsHandler().ServeHTTP(w, r)
+			return
+		}
 	}
 
 	w.WriteHeader(http.StatusNotFound)
