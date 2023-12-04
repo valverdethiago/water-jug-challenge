@@ -17,6 +17,7 @@ type Payload struct {
 func solveChallengeHandler(service service.WaterJugService) http.HandlerFunc {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		writer.Header().Set("Content-Type", "application/json")
+		enableCors(&writer)
 		var err error
 		if err = validateMethod(request); err != nil {
 			handleError(writer, http.StatusMethodNotAllowed, err)
@@ -42,6 +43,12 @@ func solveChallengeHandler(service service.WaterJugService) http.HandlerFunc {
 	}
 }
 
+func corsHandler() http.HandlerFunc {
+	return func(writer http.ResponseWriter, request *http.Request) {
+		enableCors(&writer)
+	}
+}
+
 func handleError(writer http.ResponseWriter, status int, err error) {
 	response := HttpErrorResponse{Error: err.Error()}
 	jsonBody, err := json.Marshal(response)
@@ -60,8 +67,14 @@ func handleError(writer http.ResponseWriter, status int, err error) {
 }
 
 func validateMethod(request *http.Request) error {
-	if request.Method != http.MethodPost {
+	if request.Method != http.MethodPost && request.Method != http.MethodOptions {
 		return errors.New("method not supported")
 	}
 	return nil
+}
+
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+	(*w).Header().Set("Access-Control-Allow-Headers", "*")
+	(*w).Header().Set("Access-Control-Request-Headers", "*")
 }
