@@ -7,6 +7,7 @@ import classes from './App.module.css';
 
 function App() {
   const [steps, setSteps] = useState<SolutionStep[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string|null>(null);
   console.log(import.meta.env.VITE_BACKEND_URL);
 
   
@@ -31,9 +32,12 @@ function App() {
     .then(function(json) {
       const parsedSteps = JSON.parse(JSON.stringify(json)) as SolutionStep[];
       setSteps(parsedSteps);
+      setErrorMessage(null)
     })
     .catch(function(error) {
       console.log(error.message);
+      setSteps([]);
+      setErrorMessage(error.message);
     });
 }
 
@@ -41,6 +45,7 @@ function App() {
     <>
       <div className={classes.app}>
        <h1>Water Jug Challenge</h1>
+          <span className={classes.error}>{errorMessage}</span>
           <Form solveChallenge={solveChallenge}/>
           <StepList steps={steps} />
       </div>
