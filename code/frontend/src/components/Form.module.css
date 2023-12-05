@@ -1,0 +1,36 @@
+.challenge_form {
+    background-color: #2b3566;
+    padding: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.challenge_form p {
+    color: #9da5d1;
+}
+
+.challenge_form_cntainer {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.challenge_form_container input, 
+.challenge_form_contaner button {
+    margin: 3px;
+    padding: 0.6rem;
+    border-radius: 3px;
+    border: none;
+    color: #2b3566;
+}
+
+.challenge_form button {
+    background-color: #0e1129;
+    cursor: pointer;
+    min-width: 200px;
+    min-height: 50px;
+}

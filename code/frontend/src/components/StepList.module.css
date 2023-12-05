@@ -1,0 +1,17 @@
+
+.steplist_container table {
+    min-width: 700px;
+}
+
+.steplist_container table, 
+.steplist_container  td {
+    border: 1px solid #9da5d1;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.steplist_header_row {
+    background-color: #9da5d1;
+    font-style: bold;
+    font-size: larger;
+}
