@@ -50,7 +50,7 @@ func corsHandler() http.HandlerFunc {
 }
 
 func handleError(writer http.ResponseWriter, status int, err error) {
-	response := HttpErrorResponse{Error: err.Error()}
+	response := HttpErrorResponse{Message: err.Error()}
 	jsonBody, err := json.Marshal(response)
 	if err != nil {
 		writer.WriteHeader(http.StatusInternalServerError)

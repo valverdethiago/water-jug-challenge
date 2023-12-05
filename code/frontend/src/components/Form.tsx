@@ -8,9 +8,9 @@ type FormProps = {
 
 const Form = ( {solveChallenge}: FormProps) => {
 
-    const [x_cap, setX_cap] = useState<number>(2);
-    const [y_cap, setY_cap] = useState<number>(10);
-    const [target, setTarget] = useState<number>(4);
+    const [x_cap, setX_cap] = useState<number>(-1);
+    const [y_cap, setY_cap] = useState<number>(-1);
+    const [target, setTarget] = useState<number>(-1);
     return (
         <div className={classes.challenge_form}>
             <h2>Please inform the values to do the calculation</h2>
