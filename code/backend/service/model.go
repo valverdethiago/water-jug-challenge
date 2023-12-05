@@ -17,11 +17,10 @@ func (s *State) isEquals(another State) bool {
 	return s.BucketX == another.BucketX && s.BucketY == another.BucketY && s.Explanation == another.Explanation
 }
 
-func newState(x, y int, explanation string, previous *State) State {
+func newState(x, y int, explanation string) State {
 	return State{
 		BucketX:     x,
 		BucketY:     y,
 		Explanation: explanation,
-		Previous:    previous,
 	}
 }
