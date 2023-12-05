@@ -2,6 +2,7 @@ import { SolutionStep } from './types/solutionStep';
 import Form from './components/Form';
 import StepList from './components/StepList';
 import { useState } from 'react';
+import classes from './App.module.css';
 
 function App() {
   const [steps, setSteps] = useState<SolutionStep[]>([]);
@@ -30,7 +31,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className={classes.app}>
        <h1>Water Jug Challenge</h1>
           <Form solveChallenge={solveChallenge}/>
           <StepList steps={steps} />
